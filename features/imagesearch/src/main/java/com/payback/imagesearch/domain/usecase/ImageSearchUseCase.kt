@@ -8,5 +8,5 @@ import kotlinx.coroutines.flow.Flow
  * Created by Rafiqul Hasan
  */
 interface ImageSearchUseCase {
-	fun searchImage(query:String, pageSize: Int): Flow<PagingData<ImageUIModel>>
+	suspend fun searchImage(query:String, pageSize: Int): Flow<PagingData<ImageUIModel>>
 }

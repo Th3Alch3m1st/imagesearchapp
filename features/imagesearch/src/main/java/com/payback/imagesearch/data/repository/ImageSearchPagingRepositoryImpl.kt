@@ -19,7 +19,7 @@ class ImageSearchPagingRepositoryImpl @Inject constructor(
 	private val remote: ImageSearchRemoteSource,
 	private val mapper: Mapper<ImageResponse, ImageUIModel>
 ) : ImageSearchRepository {
-	override fun searchImage(query: String, pageSize: Int): Flow<PagingData<ImageUIModel>> {
+	override suspend fun searchImage(query: String, pageSize: Int): Flow<PagingData<ImageUIModel>> {
 		return Pager(
 			config = PagingConfig(
 				pageSize = pageSize,

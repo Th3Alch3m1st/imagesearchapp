@@ -12,7 +12,7 @@ import javax.inject.Inject
 class ImageSearchUseCaseImpl @Inject constructor(
 	private val repository: ImageSearchRepository
 ) : ImageSearchUseCase {
-	override fun searchImage(query: String, pageSize: Int): Flow<PagingData<ImageUIModel>> {
+	override suspend fun searchImage(query: String, pageSize: Int): Flow<PagingData<ImageUIModel>> {
 		return repository.searchImage(query, pageSize)
 	}
 }
