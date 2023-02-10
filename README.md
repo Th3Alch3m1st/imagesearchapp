@@ -29,13 +29,13 @@ Like most of the applications I also have trade off decisions in this applicatio
 
 
 ## Demo
-<a href="url"><img src="https://github.com/Th3Alch3m1st/codingchallengestocard/blob/main/screenshots/app_demo_.gif" height="480" width="230" />
+<a href="url"><img src="[https://github.com/Th3Alch3m1st/codingchallengestocard/blob/main/screenshots/app_demo_.gif](https://github.com/Th3Alch3m1st/imagesearchapp/blob/main/screenshots/app_demo_.gif)" height="480" width="230" />
   
 ## Screenshots
-<a href="url"><img src="https://github.com/Th3Alch3m1st/codingchallengestocard/blob/main/screenshots/screen__home.jpeg" height="480" width="230" />
-<a href="url"><img src="https://github.com/Th3Alch3m1st/codingchallengestocard/blob/main/screenshots/screen_home__dark.jpeg" height="480" width="230" />
-<a href="url"><img src="https://github.com/Th3Alch3m1st/codingchallengestocard/blob/main/screenshots/screen_image_details.jpeg" height="480" width="230" />
-<a href="url"><img src="https://github.com/Th3Alch3m1st/codingchallengestocard/blob/main/screenshots/screen__setting.jpeg" height="480" width="230" />
+<a href="url"><img src="https://github.com/Th3Alch3m1st/imagesearchapp/blob/main/screenshots/screen__home.jpeg" height="480" width="230" />
+<a href="url"><img src="https://github.com/Th3Alch3m1st/imagesearchapp/blob/main/screenshots/screen_home__dark.jpeg" height="480" width="230" />
+<a href="url"><img src="https://github.com/Th3Alch3m1st/imagesearchapp/blob/main/screenshots/screen_image_details.jpeg" height="480" width="230" />
+<a href="url"><img src="https://github.com/Th3Alch3m1st/imagesearchapp/blob/main/screenshots/screen__setting.jpeg" height="480" width="230" />
 
 ## Architecture
 MVVM  with clean Architecture and modular approach
@@ -50,14 +50,14 @@ MVVM  with clean Architecture and modular approach
 - Glide: Image loading
 - Unit testing: JUnit4, AssertJ, MockitoKotlin, Espresso Arch core testing (InstantTaskExecutorRule), Kotlinx coroutines test
 - UI testing: Espresso
-- Full list: https://github.com/Th3Alch3m1st/imagesearch/blob/main/buildSrc/src/main/java/Dependencies.kt
+- Full list: https://github.com/Th3Alch3m1st/imagesearchapp/blob/main/buildSrc/src/main/java/Dependencies.kt
 
 ## Project Structure
-  <a href="url"><img src="https://github.com/Th3Alch3m1st/codingchallengestocard/blob/main/screenshots/app_architechture.png" height="466" width="485" />
-  <a href="url"><img src="https://github.com/Th3Alch3m1st/codingchallengestocard/blob/main/screenshots/project_structure.png" height="466" width="380" />
+  <a href="url"><img src="https://github.com/Th3Alch3m1st/imagesearchapp/blob/main/screenshots/app_architechture.png" height="466" width="485" />
+  <a href="url"><img src="https://github.com/Th3Alch3m1st/imagesearchapp/blob/main/screenshots/project_structure.png" height="466" width="380" />
     
 ## Application Data flow
-  <a href="url"><img src="https://github.com/Th3Alch3m1st/codingchallengestocard/blob/main/screenshots/flow.png" height="241" width="818" />  
+  <a href="url"><img src="https://github.com/Th3Alch3m1st/imagesearchapp/blob/main/screenshots/flow.png" height="241" width="818" />  
     
 ## Approach Explanation
 - ViewModel separate UI and Data layer. ViewModel allows data to survive configuration changes and improve testabilities.
