@@ -29,7 +29,7 @@ Like most of the applications I also have trade off decisions in this applicatio
 
 
 ## Demo
-<a href="url"><img src="[https://github.com/Th3Alch3m1st/imagesearchapp/blob/main/screenshots/app_demo_.gif]" height="480" width="230" />
+<a href="url"><img src="https://github.com/Th3Alch3m1st/imagesearchapp/blob/main/screenshots/app_demo_.gif" height="480" width="230" />
   
 ## Screenshots
 <a href="url"><img src="https://github.com/Th3Alch3m1st/imagesearchapp/blob/main/screenshots/screen__home.jpeg" height="480" width="230" />
