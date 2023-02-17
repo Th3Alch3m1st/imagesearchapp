@@ -17,5 +17,5 @@ abstract class DataStoreApiModule {
 
 	@Binds
 	@Singleton
-	abstract fun provideWeatherInfoRemoteSource(sourceImpl: PreferenceDataStoreAPIImpl): IPreferenceDataStoreAPI
+	abstract fun providePreferenceDataStoreAPI(sourceImpl: PreferenceDataStoreAPIImpl): IPreferenceDataStoreAPI
 }

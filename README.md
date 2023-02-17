@@ -18,7 +18,7 @@ Users can navigate settings to change themes from the toolbar option menu.
 ## Improvement area:
 - Could have written it Jetpack compose, unfortunately I haven’t  learn UI test for jetpack compose and still learning Jetpack compose
 - Could have Use room database for offline caching instead I used retrofit caching(Due to time constraints)
-- Weather Api key could have store more securely with secrets gradle plugins
+- Pixabay Api key could have store more securely with secrets gradle plugins
 - Could have write more Unit/UI test to cover more scenario
 - Could have write  kotlin dsl plugin to avoid redundant plugin import in module
 

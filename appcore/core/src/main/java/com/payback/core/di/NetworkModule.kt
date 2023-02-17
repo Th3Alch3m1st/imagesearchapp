@@ -65,7 +65,7 @@ object NetworkModule {
         val builder = LoggingInterceptor.Builder()
             .setLevel(if (isDebugAble) Level.BASIC else Level.NONE)
             .log(Platform.INFO)
-            .tag("WeatherInfo")
+            .tag("ImageInfo")
             .request("Request")
             .response("Response")
         builder.isDebugAble = isDebugAble

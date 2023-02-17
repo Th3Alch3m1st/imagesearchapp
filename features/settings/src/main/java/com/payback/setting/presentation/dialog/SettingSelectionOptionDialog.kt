@@ -8,13 +8,13 @@ import com.payback.core.dialog.BaseBottomSheetDialog
 import com.payback.core.util.gone
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.payback.feature.setting.R
-import com.payback.feature.setting.databinding.DialogBottomSeetSettingOptionSelectionBinding
+import com.payback.feature.setting.databinding.DialogBottomSheetSettingOptionSelectionBinding
 import com.payback.feature.setting.databinding.LayoutUnitItemBinding
 
 /**
  * Created By Rafiqul Hasan
  */
-class SettingSelectionOptionDialog : BaseBottomSheetDialog<DialogBottomSeetSettingOptionSelectionBinding>() {
+class SettingSelectionOptionDialog : BaseBottomSheetDialog<DialogBottomSheetSettingOptionSelectionBinding>() {
 	companion object {
 		const val REQUEST_KEY = "UNIT_INFO"
 		const val ARG_SELECTED_SETTING = "SELECTED_SETTING"
@@ -25,7 +25,7 @@ class SettingSelectionOptionDialog : BaseBottomSheetDialog<DialogBottomSeetSetti
 	private val args: SettingSelectionOptionDialogArgs by navArgs()
 
 	override val layoutResourceId: Int
-		get() = R.layout.dialog_bottom_seet_setting_option_selection
+		get() = R.layout.dialog_bottom_sheet_setting_option_selection
 
 	override val bottomSheetBehavior: Int
 		get() = BottomSheetBehavior.STATE_HALF_EXPANDED
