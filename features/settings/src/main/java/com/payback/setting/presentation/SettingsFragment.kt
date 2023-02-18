@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.payback.core.fragment.BaseFragment
 import com.payback.core.util.setSafeOnClickListener
 import com.payback.core.model.ThemeMode
 import com.payback.setting.presentation.dialog.SettingSelectionOptionDialog
 import com.payback.core.util.ThemeHelper
+import com.payback.core.util.launchAndCollectIn
 import com.payback.feature.setting.R
 import com.payback.feature.setting.databinding.FragmentSettingBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,12 +41,13 @@ class SettingsFragment : BaseFragment<FragmentSettingBinding>() {
 	}
 
 	private fun initView() {
-		lifecycleScope.launchWhenStarted {
-			viewModel.selectedTheme.collect { theme ->
-				val themeMode = viewModel.getThemeModeData().find { it.themeMode == theme }
-				dataBinding.llTheme.tvSettingName.text = getString(R.string.title_theme)
-				dataBinding.llTheme.tvSelectedSetting.text = themeMode?.name ?: ""
-			}
+		viewModel.selectedTheme.launchAndCollectIn(
+			viewLifecycleOwner,
+			Lifecycle.State.STARTED
+		) { theme ->
+			val themeMode = viewModel.getThemeModeData().find { it.themeMode == theme }
+			dataBinding.llTheme.tvSettingName.text = getString(R.string.title_theme)
+			dataBinding.llTheme.tvSelectedSetting.text = themeMode?.name ?: ""
 		}
 	}
 
@@ -84,7 +86,7 @@ class SettingsFragment : BaseFragment<FragmentSettingBinding>() {
 		}
 	}
 
-	private fun changeTheme(theme: ThemeMode){
+	private fun changeTheme(theme: ThemeMode) {
 		ThemeHelper.applyTheme(theme)
 	}
 }

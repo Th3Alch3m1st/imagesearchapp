@@ -13,13 +13,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.payback.core.fragment.FragmentCommunicator
 import com.payback.core.util.ThemeHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.payback.core.util.launchAndCollectIn
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 /**
  * Created By Rafiqul Hasan
@@ -85,12 +83,8 @@ class MainActivity : AppCompatActivity(), FragmentCommunicator {
 	}
 
 	private fun initTheme() {
-		lifecycleScope.launch {
-			repeatOnLifecycle(Lifecycle.State.STARTED) {
-				viewModel.selectedTheme.collect {
-					ThemeHelper.applyTheme(it)
-				}
-			}
+		viewModel.selectedTheme.launchAndCollectIn(this,Lifecycle.State.STARTED){themeMode ->
+			ThemeHelper.applyTheme(themeMode)
 		}
 	}
 
