@@ -9,8 +9,6 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -18,6 +16,7 @@ import com.payback.core.fragment.BaseFragment
 import com.payback.core.model.ImageUIModel
 import com.payback.core.util.DebouncingQueryTextListener
 import com.payback.core.util.gone
+import com.payback.core.util.launchAndCollectIn
 import com.payback.core.util.show
 import com.payback.feature.imagesearch.R
 import com.payback.feature.imagesearch.databinding.FragmentImageSearchBinding
@@ -25,7 +24,6 @@ import com.payback.imagedetails.ImageDetailsBottomSheetDialog
 import com.payback.imagesearch.presentation.adapter.ImagesAdapter
 import com.payback.imagesearch.presentation.adapter.PagingLoadStateAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 /**
  * Created by Rafiqul Hasan
@@ -119,49 +117,48 @@ class ImageSearchFragment : BaseFragment<FragmentImageSearchBinding>() {
 	}
 
 	private fun initObserver() {
-		lifecycleScope.launch {
-			repeatOnLifecycle(Lifecycle.State.STARTED) {
-				viewModel.imageSearchResult.collect {
-					imagesAdapter.submitData(it)
-				}
-			}
+		viewModel.imageSearchResult.launchAndCollectIn(
+			viewLifecycleOwner,
+			Lifecycle.State.STARTED
+		) {
+			imagesAdapter.submitData(it)
 		}
 
-		lifecycleScope.launch {
-			repeatOnLifecycle(Lifecycle.State.STARTED) {
-				imagesAdapter.loadStateFlow.collect { loadState ->
-					//for initial loading dialog
-					val isLoading = loadState.refresh is LoadState.Loading
-					if (isLoading) {
-						fragmentCommunicator?.showLoader()
-					} else {
-						fragmentCommunicator?.hideLoader()
-					}
+		imagesAdapter.loadStateFlow.launchAndCollectIn(
+			viewLifecycleOwner,
+			Lifecycle.State.STARTED
+		) { loadState ->
+			//for initial loading dialog
+			val isLoading = loadState.refresh is LoadState.Loading
+			if (isLoading) {
+				fragmentCommunicator?.showLoader()
+			} else {
+				fragmentCommunicator?.hideLoader()
+			}
 
-					//check if first page response is empty
-					val isListEmpty =
-						loadState.refresh is LoadState.NotLoading && imagesAdapter.itemCount == 0
-					if (isListEmpty) {
-						dataBinding.viewEmpty.root.show()
-						dataBinding.viewEmpty.tvTitle.text = getString(R.string.msg_nothing_found)
-						dataBinding.viewEmpty.btnTryAgain.gone()
-					} else {
-						dataBinding.viewEmpty.root.gone()
-					}
+			//check if first page response is empty
+			val isListEmpty =
+				loadState.refresh is LoadState.NotLoading && imagesAdapter.itemCount == 0
+			if (isListEmpty) {
+				dataBinding.viewEmpty.root.show()
+				dataBinding.viewEmpty.tvTitle.text = getString(R.string.msg_nothing_found)
+				dataBinding.viewEmpty.btnTryAgain.gone()
+			} else {
+				dataBinding.viewEmpty.root.gone()
+			}
 
-					// Show the error result if initial load fails.
-					val isInitialLoadOrRefreshFail = loadState.source.refresh is LoadState.Error
-					if (isInitialLoadOrRefreshFail) {
-						val error = (loadState.refresh as LoadState.Error).error
-						showHideErrorUI(
-							error.message ?: getString(R.string.msg_unknown_error),
-							getString(com.payback.core.R.string.retry)
-						) {
-							imagesAdapter.retry()
-						}
-					}
+			// Show the error result if initial load fails.
+			val isInitialLoadOrRefreshFail = loadState.source.refresh is LoadState.Error
+			if (isInitialLoadOrRefreshFail) {
+				val error = (loadState.refresh as LoadState.Error).error
+				showHideErrorUI(
+					error.message ?: getString(R.string.msg_unknown_error),
+					getString(com.payback.core.R.string.retry)
+				) {
+					imagesAdapter.retry()
 				}
 			}
+
 		}
 	}
 
